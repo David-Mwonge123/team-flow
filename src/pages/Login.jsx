@@ -5,6 +5,23 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    function handleLogin(e) {
+    e.preventDefault();
+
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!savedUser) {
+        alert("No account found. Please register first.");
+        return;
+    }
+
+    if (email === savedUser.email && password === savedUser.password) {
+        alert("Login successful!");
+    } else {
+        alert("Invalid email or password.");
+    }
+}
+
   return (
     <div>
         
