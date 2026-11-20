@@ -7,6 +7,9 @@ const stats = [
   { label: "Team progress", value: "57%" },
 ];
 
+const actions = ["Create a task", "Assign a task", "Update my progress", "See the team board"];
+
+
 export default function Dashboard() {
   return (
     <div className="flex min-h-screen">
@@ -26,10 +29,27 @@ export default function Dashboard() {
   ))}
 </div>
 
+
     <button className="bg-[#2a9089] text-white px-5 py-2.5 rounded-full">
       + New task
     </button>
   </div>
+<h3 className="font-semibold mt-8 mb-3">What you can do</h3>
+
+
+<div className="grid grid-cols-2 gap-3 ">
+{actions.map((a) => (
+  <button
+    key={a}
+    className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
+    {a}
+  </button>
+))}
+</div>
+
+
+
+
 </main>
     </div>
   );
