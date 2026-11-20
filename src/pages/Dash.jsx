@@ -8,8 +8,10 @@ const stats = [
 ];
 
 const actions = ["Create a task", "Assign a task", "Update my progress", "See the team board"];
-const tasks = ["Finalize homepage hero section", "Create Mobile navigation mockups"];
-
+const tasks = [
+  { title: "Finalize homepage hero section", due: "Due today", progress: 85, status: "In progress" },
+  { title: "Create mobile navigation mockups", due: "Due Nov 24", progress: 10, status: "To do" },
+];
 export default function Dashboard() {
   return (
     <div className="flex min-h-screen">
@@ -50,12 +52,16 @@ export default function Dashboard() {
 
 <h3 className="font-semibold mt-8 mb-3">My tasks</h3>
 <div className="grid grid-rows-2 gap-3 ">
-{tasks.map((a) => (
-  <button
-    key={a}
+{tasks.map((t) => (
+  <div
+    key={t.title}
     className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
-    {a}
-  </button>
+   <div>
+    <p>{t.title}</p>
+    <p className="text-sm text-gray-500">{t.due}</p>
+   </div>
+<span className="text-sm font-medium">{t.progress}%</span>
+  </div>
 ))}
 </div>
 
