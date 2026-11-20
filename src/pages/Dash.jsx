@@ -8,7 +8,7 @@ const stats = [
 ];
 
 const actions = ["Create a task", "Assign a task", "Update my progress", "See the team board"];
-
+const tasks = ["Finalize homepage hero section", "Create Mobile navigation mockups"];
 
 export default function Dashboard() {
   return (
@@ -47,6 +47,17 @@ export default function Dashboard() {
 ))}
 </div>
 
+
+<h3 className="font-semibold mt-8 mb-3">My tasks</h3>
+<div className="grid grid-rows-2 gap-3 ">
+{tasks.map((a) => (
+  <button
+    key={a}
+    className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
+    {a}
+  </button>
+))}
+</div>
 
 
 
