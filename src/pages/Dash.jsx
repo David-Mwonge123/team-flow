@@ -17,7 +17,7 @@ export default function Dashboard() {
     <div className="flex min-h-screen">
       <Sidebar />
      <main className="flex-1 p-6">
-  <div className="flex justify-between items-center">
+  <div className="flex justify-between items-center ">
     <div>
       <h1 className="text-2xl font-semibold">Good morning, Amina</h1>
   
