@@ -1,4 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
+import {
+  addTask,
+  deleteTask,
+  updateTask,
+  updateStatus
+} from "../features/tasks/TaskSlice";
 
 function Tasks() {
   const [title, setTitle] = useState("");
