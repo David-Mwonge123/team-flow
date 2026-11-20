@@ -2,16 +2,31 @@ import{ useState } from "react"
 
 function Register() {
 
-    const [name, SetName] = useState ("");
+    const [name, setName] = useState ("");
     const [email, setEmail] = useState ("");
     const [ password, setPassword] = useState ("");
+
+    function handleRegister(e) {
+    e.preventDefault();
+
+    const newUser = {
+        name: name,
+        email: email,
+        password: password,
+    };
+
+    localStorage.setItem("user", JSON.stringify(newUser));
+
+    alert("Registration successful!");
+}
+
   return (
     <div>
         <h1>Create Account</h1>
-        <form> 
+        <form onSubmit={handleRegister}> 
             <div>
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your full name" value={name} onChange={(e) => SetName(e.target.value)} />
+                <input type="text" placeholder="Enter your full name" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div>
                 <label>Email</label>
