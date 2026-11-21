@@ -1,3 +1,4 @@
+import Navbar from "../components/Navbar";
 import Sidebar from "../components/SideBar";
 
 const stats = [
@@ -14,6 +15,8 @@ const tasks = [
 ];
 export default function Dashboard() {
   return (
+  <>
+  <Navbar/>
     <div className="flex min-h-screen">
       <Sidebar />
      <main className="flex-1 p-6">
@@ -69,5 +72,6 @@ export default function Dashboard() {
 
 </main>
     </div>
+    </>
   );
 }

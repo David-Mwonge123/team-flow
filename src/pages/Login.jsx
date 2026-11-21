@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 
 function Login() {
 
@@ -6,6 +7,8 @@ function Login() {
     const [password, setPassword] = useState("");
 
   return (
+    <>
+   <Navbar/>
     <div>
         
          <h1>Login</h1>
@@ -21,6 +24,7 @@ function Login() {
             <button type="submit">Login</button>
          </form>
          </div>
+          </>
   );
 }
 

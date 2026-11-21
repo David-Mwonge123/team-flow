@@ -1,4 +1,5 @@
 import{ useState } from "react"
+import Navbar from "../components/Navbar";
 
 function Register() {
 
@@ -6,6 +7,8 @@ function Register() {
     const [email, setEmail] = useState ("");
     const [ password, setPassword] = useState ("");
   return (
+    <>
+   <Navbar/>
     <div>
         <h1>Create Account</h1>
         <form> 
@@ -24,6 +27,7 @@ function Register() {
             <button type="submit">Register</button>
         </form>
         </div>
+         </>
   );
 }
 

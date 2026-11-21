@@ -1,7 +1,10 @@
+import Navbar from "../components/Navbar"
 
 function Teamboard() {
   return (
-    <div>Teamboard</div>
+    <>
+    <Navbar/>
+    </>
   )
 }
 
