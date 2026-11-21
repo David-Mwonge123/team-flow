@@ -8,7 +8,7 @@ const tasks = [
     assigned: "Amina",
     deadline: "Nov 24, 2026",
     priority: "High",
-    status: "In progress",
+    status: "Incomplete",
   },
   {
     id: 2,
@@ -54,7 +54,7 @@ function MyTasks() {
           </div>
 
           <div className="bg-white border-gray-200 border p-4 rounded-lg">
-            <h2 className="text-2xl font-bold text-yellow-600">1</h2>
+            <h2 className="text-2xl font-bold text-orange-600">2</h2>
             <p className="text-gray-500 text-sm">Pending</p>
           </div>
 
@@ -100,7 +100,7 @@ function MyTasks() {
                     <span  className={`text-sm px-3 py-1 rounded-full font-medium ${
       task.status === "Completed"
         ? "bg-green-100 text-green-700"
-        : task.status === "pending"
+        : task.status === "incomplete"
         ? "bg-orange-100 text-orange-700"
         : "bg-red-100 text-red-700"
     }`}
