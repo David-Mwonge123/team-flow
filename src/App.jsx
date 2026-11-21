@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Dash" element={<Dashboard />} />
         <Route path="/mytask" element={<Mytask />} />
         <Route path="/teamboard" element={<Teamboard />} />
       </Routes>

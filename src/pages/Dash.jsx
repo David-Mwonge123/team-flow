@@ -16,9 +16,9 @@ const tasks = [
 export default function Dashboard() {
   return (
   <>
-  <Navbar/>
+  
     <div className="flex min-h-screen">
-      
+      <Navbar/>
      <main className="flex-1 p-6">
   <div className="flex justify-between items-center ">
     <div>
