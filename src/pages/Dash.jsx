@@ -18,7 +18,7 @@ export default function Dashboard() {
   <>
   <Navbar/>
     <div className="flex min-h-screen">
-      <Sidebar />
+      
      <main className="flex-1 p-6">
   <div className="flex justify-between items-center ">
     <div>

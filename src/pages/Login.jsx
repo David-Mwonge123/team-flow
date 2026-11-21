@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 
 function Login() {
 
@@ -8,21 +7,29 @@ function Login() {
 
   return (
     <>
-   <Navbar/>
-    <div>
+   {/* login card */}
+    <div className=" bg-white border border-gray-200 rounded-2xl shadow-xl p-8  m-70" >
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-extrabold text-blue-700 tracking-wide">Team Flow</h1>
+          <h3 className="text-2xl font-bold text-gray-800 ">Welcome Back!</h3>
+          <p>  Login to manage your tasks and team.</p>
+        </div>
         
-         <h1>Login</h1>
-         <form>
+        <div className="">
+         <h1  className="text-2xl font-bold text-gray-800 mb-6">Login</h1>
+         <form className="space-y-5">
             <div>
-                <label>Email</label> 
-                    <input type="email" placeholder="Enter your email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label> 
+                    <input className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"type="email" placeholder="Enter your email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
                 
             </div>
-            <div><label> Password</label>
-            <input type="password" placeholder="Enter your password" value={email} onChange={(e) => setPassword(e.target.value)} />
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2"> Password</label>
+            <input className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" type="password" placeholder="Enter your password" value={email} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transition duration-300 active:scale-95">Login</button>
          </form>
+         </div>
          </div>
           </>
   );
