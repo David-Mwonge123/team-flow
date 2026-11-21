@@ -1,14 +1,22 @@
-
-import Navbar from "./components/Navbar"
-
+import { Router } from "react-router-dom";
 
 
 function App() {
   return (
-   <>
-   <Navbar/>
-   </>
+  <>
+  <Router>
+    <Routes>
+      <Route path="/" element={login}/>
+    </Routes>
+
+  </Router>
+  </>
+   
   )
 }
 
-export default App
+
+
+export default function App() {
+  return <Dashboard />;
+}
