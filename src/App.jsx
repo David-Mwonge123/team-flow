@@ -1,5 +1,7 @@
-import { Route, Router } from "react-router-dom";
-import login from"./pages/Login";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dash";
 import Mytask from "./pages/Mytask";
@@ -7,24 +9,16 @@ import Teamboard from "./pages/Teamboard";
 
 function App() {
   return (
-  <>
-  <Router>
-    <Routes>
-      <Route path="/" element={<login/>}/>
-      <Route path="/Register" element={<Register/>}/>
-      <Route path="/Dash" element={<Dash/>}/>
-      <Route path="/Mytask"element={<Mytask/>}/>
-      <Route path="/Teamboard" element={<Teamboard/>}/>
-    </Routes>
-
-  </Router>
-  </>
-   
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/mytask" element={<Mytask />} />
+        <Route path="/teamboard" element={<Teamboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-
-
-export default function App() {
-  return <Dashboard />;
-}
+export default App;

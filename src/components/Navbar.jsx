@@ -10,11 +10,11 @@ function Navbar() {
     </div >
     <nav className="flex flex-col gap-2 px-4 py-6">
         <ul>
-            <a href="#"className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Login</a>
-            <a href="#" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Register</a>
-            <a href="#" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Dashboard</a>
-            <a href="#" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">My task</a>
-            <a href="#" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Team board</a>
+            <Link to="/"className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Login</Link>
+            <Link to ="/Register" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Register</Link>
+            <Link to="/Dash" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Dashboard</Link>
+            <Link to="/Mytask" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">My task</Link>
+            <Link to="/Teamboard" className="px-4 py-3 rounded-lg text-slate-300 hover:bg-blue-600 hover:text-white transition duration-300">Team board</Link>
         </ul>
     </nav>
     </aside>
