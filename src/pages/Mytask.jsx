@@ -4,8 +4,8 @@ import Navbar from "../components/Navbar";
 const tasks = [
   {
     id: 1,
-    title: "Design homepage",
-    assigned: "Amina",
+    title: "Design all pages",
+    assigned: "Mercy",
     deadline: "Nov 24, 2026",
     priority: "High",
     status: "Incomplete",
@@ -13,7 +13,7 @@ const tasks = [
   {
     id: 2,
     title: "Create login page",
-    assigned: "Amina",
+    assigned: "Farhia",
     deadline: "Nov 25, 2026",
     priority: "Medium",
     status: "To do",
@@ -21,7 +21,7 @@ const tasks = [
   {
     id: 3,
     title: "Develop dashboard",
-    assigned: "Amina",
+    assigned: "Tamila",
     deadline: "Nov 27, 2026",
     priority: "Low",
     status: "Completed",
