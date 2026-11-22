@@ -1,27 +1,57 @@
 
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar";
 import Tasks from "../components/Tasks";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../features/auth/authSlice";
 
-const stats = [
-  { label: "My tasks", value: 3 },
-  { label: "Due today", value: 1 },
-  { label: "My progress", value: "65%" },
-  { label: "Team progress", value: "57%" },
-];
+const filters = ["All", "To Do", "In Progress", "Completed", "Overdue"];
 
 export default function Dashboard() {
+  const tasks = useSelector((state) => state.tasks);
+  const user = useSelector((state) => state.auth.user);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector((state) => state.auth.user);
+  const [filter, setFilter] = useState("All");
 
   function handleLogout() {
     dispatch(logout());
     navigate("/login");
   }
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const total = tasks.length;
+
+  const done = tasks.filter(
+    (t) => t.status === "Completed"
+  ).length;
+
+  const pending = tasks.filter(
+    (t) => t.status !== "Completed"
+  ).length;
+
+  const overdue = tasks.filter(
+    (t) =>
+      t.dueDate &&
+      t.dueDate < today &&
+      t.status !== "Completed"
+  ).length;
+
+  const progress = total
+    ? Math.round((done / total) * 100)
+    : 0;
+
+  const stats = [
+    { label: "All tasks", value: total },
+    { label: "Completed", value: done },
+    { label: "Pending", value: pending },
+    { label: "Overdue", value: overdue },
+    { label: "Progress", value: `${progress}%` },
+  ];
 
   return (
     <div className="flex min-h-screen">
@@ -41,7 +71,7 @@ export default function Dashboard() {
           </button>
         </div>
 
-        <div className="grid grid-cols-4 gap-3 mt-5">
+        <div className="grid grid-cols-5 gap-3 mt-5">
           {stats.map((s) => (
             <div
               key={s.label}
@@ -50,14 +80,43 @@ export default function Dashboard() {
               <strong className="block text-2xl font-medium">
                 {s.value}
               </strong>
-              <span className="text-gray-500 text-sm">{s.label}</span>
+
+              <span className="text-gray-500 text-sm">
+                {s.label}
+              </span>
             </div>
           ))}
         </div>
 
-        <Tasks />
+        <div className="mt-5">
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-[#2a9089] h-2 rounded-full"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-8">
+          {filters.map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-4 py-2 rounded-full text-sm border ${
+                filter === f
+                  ? "bg-[#2a9089] text-white"
+                  : "bg-white text-gray-600"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <Tasks filter={filter} />
       </main>
     </div>
   );
 }
+
 
