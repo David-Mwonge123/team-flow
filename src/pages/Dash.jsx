@@ -1,76 +1,90 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import Sidebar from "../components/SideBar";
-import Tasks from "../components/Tasks";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../features/auth/authSlice";
 
-const filters = ["All", "To Do", "In Progress", "Completed", "Overdue"];
+const stats = [
+  { label: "My tasks", value: 3 },
+  { label: "Due today", value: 1 },
+  { label: "My progress", value: "65%" },
+  { label: "Team progress", value: "57%" },
+];
 
+const actions = ["Create a task", "Assign a task", "Update my progress", "See the team board"];
+const tasks = [
+  { title: "Finalize homepage hero section", due: "Due today", progress: 85, status: "In progress" },
+  { title: "Create mobile navigation mockups", due: "Due Nov 24", progress: 10, status: "To do" },
+];
 export default function Dashboard() {
-  const tasks = useSelector((state) => state.tasks);
-  const [filter, setFilter] = useState("All");
 
-  const today = new Date().toISOString().slice(0, 10);
-  const total = tasks.length;
-  const done = tasks.filter((t) => t.status === "Completed").length;
-  const pending = tasks.filter((t) => t.status !== "Completed").length;
-  const overdue = tasks.filter(
-    (t) => t.dueDate && t.dueDate < today && t.status !== "Completed"
-  ).length;
-  const progress = total ? Math.round((done / total) * 100) : 0;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const stats = [
-    { label: "All tasks", value: total },
-    { label: "Completed", value: done },
-    { label: "Pending", value: pending },
-    { label: "Overdue", value: overdue },
-    { label: "Progress", value: `${progress}%` },
-  ];
+  const user = useSelector((state) => state.auth.user);
 
+  function handleLogout() {
+    dispatch(logout());
+    navigate("/login");
+  }
+  
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 p-6">
-        <h1 className="text-2xl font-semibold">Good morning, Amina</h1>
+     <main className="flex-1 p-6">
+  <div className="flex justify-between items-center ">
+    <div>
+      <h1 className="text-2xl font-semibold">Good morning,{user?.name || "User"} </h1>
+  
+    </div>
+    <div className="grid grid-cols-4 gap-3 mt-5">
+  {stats.map((s) => (
+    <div key={s.label} className="bg-white border border-gray-200 rounded-xl p-4">
+      <strong className="block text-2xl font-medium">{s.value}</strong>
+      <span className="text-gray-500 text-sm">{s.label}</span>
+    </div>
+  ))}
+</div>
 
-        <div className="grid grid-cols-5 gap-3 mt-5">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="bg-white border border-gray-200 rounded-xl p-4"
-            >
-              <strong className="block text-2xl font-medium">{s.value}</strong>
-              <span className="text-gray-500 text-sm">{s.label}</span>
-            </div>
-          ))}
-        </div>
 
-        <div className="mt-5">
-          <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-[#2a9089] h-2 rounded-full"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
+    <button className="bg-[#2a9089] text-white px-5 py-2.5 rounded-full">
+      + New task
+    </button>
+    <button onClick={handleLogout} className="bg-red-600 text-white px-5 py-2.5 rounded-full">
+    Logout
+  </button>
+  </div>
+<h3 className="font-semibold mt-8 mb-3">What you can do</h3>
 
-        <div className="flex flex-wrap gap-2 mt-8">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-full text-sm border ${
-                filter === f
-                  ? "bg-[#2a9089] text-white"
-                  : "bg-white text-gray-600"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
 
-        <Tasks filter={filter} />
-      </main>
+<div className="grid grid-cols-2 gap-3 ">
+{actions.map((a) => (
+  <button
+    key={a}
+    className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
+    {a}
+  </button>
+))}
+</div>
+
+
+<h3 className="font-semibold mt-8 mb-3">My tasks</h3>
+<div className="grid grid-rows-2 gap-3 ">
+{tasks.map((t) => (
+  <div
+    key={t.title}
+    className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
+   <div>
+    <p>{t.title}</p>
+    <p className="text-sm text-gray-500">{t.due}</p>
+   </div>
+<span className="text-sm font-medium">{t.progress}%</span>
+  </div>
+))}
+</div>
+
+
+
+</main>
     </div>
   );
 }
