@@ -1,4 +1,5 @@
 import Sidebar from "../components/SideBar";
+import Tasks from "../components/Tasks";
 
 const stats = [
   { label: "My tasks", value: 3 },
@@ -50,20 +51,7 @@ export default function Dashboard() {
 </div>
 
 
-<h3 className="font-semibold mt-8 mb-3">My tasks</h3>
-<div className="grid grid-rows-2 gap-3 ">
-{tasks.map((t) => (
-  <div
-    key={t.title}
-    className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100">
-   <div>
-    <p>{t.title}</p>
-    <p className="text-sm text-gray-500">{t.due}</p>
-   </div>
-<span className="text-sm font-medium">{t.progress}%</span>
-  </div>
-))}
-</div>
+<Tasks />
 
 
 
