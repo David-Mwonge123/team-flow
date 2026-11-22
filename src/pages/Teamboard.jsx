@@ -44,6 +44,14 @@ const teamTasks = [
         priority: "Medium",
         status: "Completed",
     },
+    {
+        id: 6,
+        title: "Build Calender page",
+        assigned: "Noah",
+        deadline: "Nov 23, 2026",
+        priority: "Medium",
+        status: "Incompleted",
+    },
 ];
 
 function Teamboard() {
