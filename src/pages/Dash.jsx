@@ -1,30 +1,28 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Sidebar from "../components/SideBar";
 import Tasks from "../components/Tasks";
 
-const actions = [
-  "Create a task",
-  "Assign a task",
-  "Update my progress",
-  "See the team board",
-];
+const filters = ["All", "To Do", "In Progress", "Completed", "Overdue"];
 
 export default function Dashboard() {
   const tasks = useSelector((state) => state.tasks);
+  const [filter, setFilter] = useState("All");
 
   const today = new Date().toISOString().slice(0, 10);
   const total = tasks.length;
   const done = tasks.filter((t) => t.status === "Completed").length;
-  const inProgress = tasks.filter((t) => t.status === "In Progress").length;
-  const dueToday = tasks.filter(
-    (t) => t.dueDate === today && t.status !== "Completed"
+  const pending = tasks.filter((t) => t.status !== "Completed").length;
+  const overdue = tasks.filter(
+    (t) => t.dueDate && t.dueDate < today && t.status !== "Completed"
   ).length;
   const progress = total ? Math.round((done / total) * 100) : 0;
 
   const stats = [
     { label: "All tasks", value: total },
-    { label: "Due today", value: dueToday },
-    { label: "In progress", value: inProgress },
+    { label: "Completed", value: done },
+    { label: "Pending", value: pending },
+    { label: "Overdue", value: overdue },
     { label: "Progress", value: `${progress}%` },
   ];
 
@@ -34,7 +32,7 @@ export default function Dashboard() {
       <main className="flex-1 p-6">
         <h1 className="text-2xl font-semibold">Good morning, Amina</h1>
 
-        <div className="grid grid-cols-4 gap-3 mt-5">
+        <div className="grid grid-cols-5 gap-3 mt-5">
           {stats.map((s) => (
             <div
               key={s.label}
@@ -46,19 +44,32 @@ export default function Dashboard() {
           ))}
         </div>
 
-        <h3 className="font-semibold mt-8 mb-3">What you can do</h3>
-        <div className="grid grid-cols-2 gap-3">
-          {actions.map((a) => (
+        <div className="mt-5">
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-[#2a9089] h-2 rounded-full"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-8">
+          {filters.map((f) => (
             <button
-              key={a}
-              className="bg-white border border-gray-200 rounded-xl p-4 text-left hover:bg-gray-100"
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-4 py-2 rounded-full text-sm border ${
+                filter === f
+                  ? "bg-[#2a9089] text-white"
+                  : "bg-white text-gray-600"
+              }`}
             >
-              {a}
+              {f}
             </button>
           ))}
         </div>
 
-        <Tasks />
+        <Tasks filter={filter} />
       </main>
     </div>
   );
