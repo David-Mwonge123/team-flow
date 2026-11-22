@@ -15,8 +15,7 @@ function Navbar() {
     <div className="flex-1">
     <nav className="px-4 py-6">
         <ul className="flex flex-col gap-3">
-            <li><Link to="/"className=" block px-5 py-3 rounded-lg text-slate-300 hover:bg-teal-600 hover:text-white transition duration-300">Login</Link></li>
-            <li><Link to ="/Register" className=" block px-5 py-3 rounded-lg text-slate-300 hover:bg-teal-600 hover:text-white transition duration-300">Register</Link></li>
+            
             <li><Link to="/Dash" className=" block px-5 py-3 rounded-lg text-slate-300 hover:bg-teal-600 hover:text-white transition duration-300">Dashboard</Link></li>
             <li><Link to="/Mytask" className=" block px-5 py-3 rounded-lg text-slate-300 hover:bg-teal-600 hover:text-white transition duration-300">My task</Link></li>
             <li><Link to="/Teamboard" className=" block px-5 py-3 rounded-lg text-slate-300 hover:bg-teal-600 hover:text-white transition duration-300">Team board</Link></li>
