@@ -2,11 +2,12 @@
 import Navbar from "../components/Navbar";
 
 const members = [
-    { id: 1, name: "Sabiha", role: "Team Leader", tasks: 4 },
-    { id: 2, name: "Farhia", role: "Developer", tasks: 3 },
-    { id: 3, name: "Mercy", role: "UI/UX Designer", tasks: 2 },
-    { id: 4, name: "David", role: "Developer", tasks: 3 },
-    { id: 5, name: "Tamila", role: "Content Writer", tasks: 2 },
+    { id: 1, name: "Sabiha", role: "Team Leader"},
+    { id: 2, name: "Farhia", role: "create login page"},
+    { id: 3, name: "Mercy", role: "UI/UX Designer"},
+    { id: 4, name: "David", role: "Developer work on redux" },
+    { id: 5, name: "Tamila", role: "Dashboard"},
+     { id: 5, name: "Noah", role: "Developer"},
 ];
 
 const teamTasks = [
@@ -14,7 +15,7 @@ const teamTasks = [
         id: 1,
         title: "Design homepage",
         assigned: "Mercy",
-        deadline: "Nov 24, 2026",
+        deadline: "Nov 23, 2026",
         priority: "High",
         status: "Completed",
     },
@@ -22,31 +23,24 @@ const teamTasks = [
         id: 2,
         title: "Develop login page",
         assigned: "Farhia",
-        deadline: "Nov 25, 2026",
+        deadline: "Nov 23, 2026",
         priority: "Medium",
         status: "In progress",
     },
-    {
-        id: 3,
-        title: "Create mobile mockups",
-        assigned: "Tamila",
-        deadline: "Nov 26, 2026",
-        priority: "High",
-        status: "Pending",
-    },
+   
     {
         id: 4,
-        title: "Write website content",
+        title: "Redux",
         assigned: "David",
-        deadline: "Nov 27, 2026",
-        priority: "Low",
+        deadline: "Nov 23, 2026",
+        priority: "high",
         status: "Incomplete",
     },
     {
         id: 5,
         title: "Build dashboard",
         assigned: "Tamila",
-        deadline: "Nov 28, 2026",
+        deadline: "Nov 23, 2026",
         priority: "Medium",
         status: "Completed",
     },
@@ -69,17 +63,17 @@ function Teamboard() {
                 {/* Team overview */}
                 <div className="grid grid-cols-3 gap-4 mb-8">
 
-                    <div className="bg-white border p-5 rounded-xl">
-                        <h2 className="text-2xl font-bold">5</h2>
+                    <div className="bg-white border-gray-200 border p-5 rounded-xl">
+                        <h2 className="text-2xl font-bold">6</h2>
                         <p className="text-gray-500 text-sm">Team Members</p>
                     </div>
 
-                    <div className="bg-white border p-5 rounded-xl">
-                        <h2 className="text-2xl font-bold">14</h2>
+                    <div className="bg-white border-gray-200 border p-5 rounded-xl">
+                        <h2 className="text-2xl font-bold">6</h2>
                         <p className="text-gray-500 text-sm">Total Tasks</p>
                     </div>
 
-                    <div className="bg-white border p-5 rounded-xl">
+                    <div className="bg-white border-gray-200 border p-5 rounded-xl">
                         <h2 className="text-2xl font-bold text-green-600">2</h2>
                         <p className="text-gray-500 text-sm">Completed Tasks</p>
                     </div>
@@ -87,7 +81,7 @@ function Teamboard() {
                 </div>
 
                 {/* Team members */}
-                <div className="bg-white border rounded-xl mb-8">
+                <div className="bg-white border-gray-200 border rounded-xl mb-8">
 
                     <div className="p-5 border-b">
                         <h2 className="font-semibold text-gray-800">
@@ -100,7 +94,7 @@ function Teamboard() {
                         {members.map((member) => (
                             <div
                                 key={member.id}
-                                className="border rounded-lg p-4 flex items-center gap-3"
+                                className="border rounded-lg p-4 border-gray-200 flex items-center gap-3"
                             >
 
                                 <div className="w-11 h-11 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center font-bold">
@@ -128,7 +122,7 @@ function Teamboard() {
                 </div>
 
                 {/* Team tasks */}
-                <div className="bg-white border rounded-xl overflow-x-auto">
+                <div className="bg-white border rounded-xl border-gray-200 overflow-x-auto">
 
                     <div className="p-5 border-b">
                         <h2 className="font-semibold text-gray-800">
@@ -136,7 +130,7 @@ function Teamboard() {
                         </h2>
                     </div>
 
-                    <table className="w-full text-left">
+                    <table className="w-full text-left ">
 
                         <thead className="bg-gray-50 text-gray-500 text-sm">
                             <tr>
