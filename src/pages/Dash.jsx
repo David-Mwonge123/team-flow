@@ -1,4 +1,7 @@
 import Sidebar from "../components/SideBar";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../features/auth/authSlice";
 
 const stats = [
   { label: "My tasks", value: 3 },
@@ -13,13 +16,24 @@ const tasks = [
   { title: "Create mobile navigation mockups", due: "Due Nov 24", progress: 10, status: "To do" },
 ];
 export default function Dashboard() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.auth.user);
+
+  function handleLogout() {
+    dispatch(logout());
+    navigate("/login");
+  }
+  
   return (
     <div className="flex min-h-screen">
       <Sidebar />
      <main className="flex-1 p-6">
   <div className="flex justify-between items-center ">
     <div>
-      <h1 className="text-2xl font-semibold">Good morning, Amina</h1>
+      <h1 className="text-2xl font-semibold">Good morning,{user?.name || "User"} </h1>
   
     </div>
     <div className="grid grid-cols-4 gap-3 mt-5">
@@ -35,6 +49,9 @@ export default function Dashboard() {
     <button className="bg-[#2a9089] text-white px-5 py-2.5 rounded-full">
       + New task
     </button>
+    <button onClick={handleLogout} className="bg-red-600 text-white px-5 py-2.5 rounded-full">
+    Logout
+  </button>
   </div>
 <h3 className="font-semibold mt-8 mb-3">What you can do</h3>
 
