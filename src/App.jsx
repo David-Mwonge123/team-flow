@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dash";
 import Calendar from "./components/Calendar";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Tasks from "./components/Tasks";
-import Calendar from "./components/Calendar";
+
 
 export default function App() {
   return (
