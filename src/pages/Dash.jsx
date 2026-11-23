@@ -49,7 +49,7 @@ export default function Dashboard() {
     { label: "Completed", value: done },
     { label: "Pending", value: pending },
     { label: "Overdue", value: overdue },
-    { label: "Progress", value: ${progress}% },
+    { label: "Progress", value: '${progress}%' },
   ];
 
   return (
