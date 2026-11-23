@@ -1,8 +1,14 @@
 import { useState } from "react";
 
-const links = ["Dashboard", "My tasks", "Team board", "Calendar"];
+const links = [
+  { label: "Dashboard", filter: "All" },
+  { label: "My tasks", filter: "All" },
+  { label: "Pending", filter: "Pending" },
+  { label: "Completed", filter: "Completed" },
+  { label: "Overdue", filter: "Overdue" },
+];
 
-export default function Sidebar() {
+export default function Sidebar({ onSelectFilter }) {
   const [active, setActive] = useState("Dashboard");
 
   return (
@@ -11,17 +17,18 @@ export default function Sidebar() {
 
       {links.map((link) => (
         <a
-          key={link}
+          key={link.label}
           href="#"
           className={`p-2.5 rounded-lg text-[#cfe7e3] hover:bg-[#2a7f86] hover:text-white ${
-            active === link ? "bg-[#2a7f86] text-white" : ""
+            active === link.label ? "bg-[#2a7f86] text-white" : ""
           }`}
           onClick={(e) => {
             e.preventDefault();
-            setActive(link);
+            setActive(link.label);
+            if (onSelectFilter) onSelectFilter(link.filter);
           }}
         >
-          {link}
+          {link.label}
         </a>
       ))}
 
