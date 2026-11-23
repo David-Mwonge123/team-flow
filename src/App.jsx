@@ -4,11 +4,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dash";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import Tasks from "./components/Tasks";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
@@ -21,9 +22,7 @@ export default function App() {
         }
       />
 
-      <Route path="/tasks" element={<Tasks />} />
-
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }

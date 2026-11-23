@@ -36,14 +36,13 @@ function Tasks({ filter = "All" }) {
 
     dispatch(
       addTask({
-        id: Date.now(),
         title,
         description,
         priority,
         dueDate,
         assignedTo,
-        status: "To Do",
-      })
+        status: "Pending",
+      }),
     );
 
     setTitle("");
@@ -208,6 +207,16 @@ function Tasks({ filter = "All" }) {
                     >
                       Delete
                     </button>
+                    <button
+                      onClick={() =>
+                        dispatch(
+                          updateStatus({ id: task.id, status: "Completed" }),
+                        )
+                      }
+                      className="text-sm text-green-600 hover:underline"
+                    >
+                      Complete
+                    </button>
                   </div>
                 </div>
 
@@ -221,7 +230,7 @@ function Tasks({ filter = "All" }) {
                         updateStatus({
                           id: task.id,
                           status: e.target.value,
-                        })
+                        }),
                       )
                     }
                     className="border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#2a9089]"

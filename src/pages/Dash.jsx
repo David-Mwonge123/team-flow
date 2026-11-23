@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar";
 import Tasks from "../components/Tasks";
 import { logout } from "../features/auth/authSlice";
+import { fetchTasks } from "../features/tasks/TaskSlice";
+import { useEffect } from "react";
 
 const filters = ["All", "To Do", "In Progress", "Completed", "Overdue"];
 
@@ -14,6 +15,10 @@ export default function Dashboard() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   const [filter, setFilter] = useState("All");
 
@@ -26,24 +31,15 @@ export default function Dashboard() {
 
   const total = tasks.length;
 
-  const done = tasks.filter(
-    (t) => t.status === "Completed"
-  ).length;
+  const done = tasks.filter((t) => t.status === "Completed").length;
 
-  const pending = tasks.filter(
-    (t) => t.status !== "Completed"
-  ).length;
+  const pending = tasks.filter((t) => t.status !== "Pending").length;
 
   const overdue = tasks.filter(
-    (t) =>
-      t.dueDate &&
-      t.dueDate < today &&
-      t.status !== "Completed"
+    (t) => t.dueDate && t.dueDate < today && t.status !== "Completed",
   ).length;
 
-  const progress = total
-    ? Math.round((done / total) * 100)
-    : 0;
+  const progress = total ? Math.round((done / total) * 100) : 0;
 
   const stats = [
     { label: "All tasks", value: total },
@@ -55,7 +51,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar onSelectFilter={setFilter}/>
 
       <main className="flex-1 p-6">
         <div className="flex justify-between items-center">
@@ -77,13 +73,9 @@ export default function Dashboard() {
               key={s.label}
               className="bg-white border border-gray-200 rounded-xl p-4"
             >
-              <strong className="block text-2xl font-medium">
-                {s.value}
-              </strong>
+              <strong className="block text-2xl font-medium">{s.value}</strong>
 
-              <span className="text-gray-500 text-sm">
-                {s.label}
-              </span>
+              <span className="text-gray-500 text-sm">{s.label}</span>
             </div>
           ))}
         </div>
@@ -118,7 +110,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-useEffect(() => {
-  dispatch(fetchTasks());
-}, [dispatch]);
