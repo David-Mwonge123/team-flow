@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/SideBar";
+import sidebar from "../components/sidebar";
 import Tasks from "../components/Tasks";
 import { logout } from "../features/auth/authSlice";
 import { fetchTasks } from "../features/tasks/TaskSlice";
