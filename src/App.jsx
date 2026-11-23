@@ -3,9 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dash";
-import ProtectedRoute from "./routes/ProtectedRoute";
-import Tasks from "./components/Tasks";
 import Calendar from "./components/Calendar";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 export default function App() {
   return (
