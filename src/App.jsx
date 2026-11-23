@@ -1,9 +1,11 @@
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import Tasks from "./components/Tasks";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dash";
 import Calendar from "./components/Calendar";
+import Tasks from "./pages/Mytask";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 export default function App() {
@@ -30,7 +32,14 @@ export default function App() {
         }
       />
 
-      <Route path="/tasks" element={<Tasks />} />
+      <Route
+        path="/tasks"
+        element={
+          <ProtectedRoute>
+            <Tasks />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>

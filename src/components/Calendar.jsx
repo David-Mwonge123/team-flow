@@ -1,5 +1,7 @@
+
 import { useState, useMemo, useCallback, memo } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./Calendar.css";
 
 const EMPTY = [];
@@ -18,8 +20,11 @@ const Day = memo(function Day({ k, date, hasTasks, selected, onSelect }) {
 
 export default function Calendar() {
   const tasks = useSelector((s) => s.tasks) || EMPTY;
+  const navigate = useNavigate();
+
   const [view, setView] = useState(new Date());
   const [selected, setSelected] = useState(toKey(new Date()));
+
   const y = view.getFullYear();
   const m = view.getMonth();
 
@@ -43,28 +48,47 @@ export default function Calendar() {
     (n) => setView((d) => new Date(d.getFullYear(), d.getMonth() + n, 1)),
     []
   );
+
   const select = useCallback((k) => setSelected(k), []);
 
   const dayTasks = byDate[selected] || EMPTY;
+
   const title = new Date(selected + "T00:00:00").toLocaleDateString("en-US", {
-    month: "long", day: "numeric", year: "numeric",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 
   return (
     <div className="cal-page">
+      <button
+        type="button"
+        onClick={() => navigate("/dashboard")}
+        className="mb-4 px-4 py-2 rounded-lg bg-[#17505a] text-white hover:bg-[#2a7f86]"
+      >
+        ← Back to Dashboard
+      </button>
+
       <h1>Calendar</h1>
 
       <section className="cal">
         <header>
           <button onClick={() => move(-1)}>‹ Prev</button>
-          <h2>{view.toLocaleString("en-US", { month: "long", year: "numeric" })}</h2>
+          <h2>
+            {view.toLocaleString("en-US", {
+              month: "long",
+              year: "numeric",
+            })}
+          </h2>
           <button onClick={() => move(1)}>Next ›</button>
         </header>
 
         <div className="grid">
           {DAYS.map((d) => <b key={d}>{d}</b>)}
+
           {cells.map((d, i) => {
             const k = d ? toKey(d) : "";
+
             return (
               <Day
                 key={d ? k : `e${i}`}
@@ -81,18 +105,24 @@ export default function Calendar() {
 
       <section className="details">
         <h3>Tasks for {title}</h3>
-        {dayTasks.length === 0 && <p className="none">No tasks due this day.</p>}
+
+        {dayTasks.length === 0 && (
+          <p className="none">No tasks due this day.</p>
+        )}
+
         {dayTasks.map((t) => (
           <div className="row" key={t.id}>
             <div>
               <strong>{t.title}</strong>
               {t.description && <p>{t.description}</p>}
             </div>
-            <span className={`pill ${String(t.status).toLowerCase()}`}>{t.status}</span>
+
+            <span className={`pill ${String(t.status).toLowerCase()}`}>
+              {t.status}
+            </span>
           </div>
         ))}
       </section>
     </div>
   );
 }
-
