@@ -91,7 +91,7 @@ export default function Dashboard() {
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-[#2a9089] h-2 rounded-full"
-              style={{ width: ${progress}% }}
+              style={{ width: '${progress}%' }}
             />
           </div>
         </div>
