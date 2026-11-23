@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dash";
 import Calendar from "./components/Calendar";
-import Tasks from "./pages/Mytask";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 export default function App() {
