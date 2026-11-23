@@ -22,7 +22,6 @@ export default function Calendar() {
   const [selected, setSelected] = useState(toKey(new Date()));
   const y = view.getFullYear();
   const m = view.getMonth();
-  
 
   const byDate = useMemo(() => {
     const map = {};
@@ -95,4 +94,3 @@ export default function Calendar() {
       </section>
     </div>
   );
-}
