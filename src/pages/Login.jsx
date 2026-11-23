@@ -1,38 +1,106 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleLogin(e) {
+    e.preventDefault();
+
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!savedUser) {
+      alert("No account found. Please register first.");
+      return;
+    }
+
+    if (email === savedUser.email && password === savedUser.password) {
+      dispatch(login(savedUser));
+
+      alert("Login successful!");
+
+      navigate("/dashboard");
+    } else {
+      alert("Invalid email or password.");
+    }
+  }
 
   return (
-    <>
-   {/* login card */}
-    <div className=" bg-white border border-gray-200 rounded-2xl shadow-xl p-8  m-70" >
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+      <div className="w-full max-w-md bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-teal-700 tracking-wide">Team Flow</h1>
-          <h3 className="text-2xl font-bold text-gray-800 ">Welcome Back!</h3>
-          <p>  Login to manage your tasks and team.</p>
+          <h1 className="text-3xl font-semibold text-gray-800">
+            {" "}
+            Welcome Back
+          </h1>
+
+          <p className="text-gray-500 mt-2">
+            {" "}
+            Login to access your Team Task Manager
+          </p>
         </div>
-        
-        <div className="">
-         <h1  className="text-2xl font-bold text-gray-800 mb-6">Login</h1>
-         <form className="space-y-5">
-            <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label> 
-                    <input className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-teal-500 focus:border-cyan-500 transition duration-200"type="email" placeholder="Enter your email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
-                
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2"> Password</label>
-            <input className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-2 focus:ring-cyan-500 focus:border-teal-500 transition duration-200" type="password" placeholder="Enter your password" value={email} onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transition duration-300 active:scale-95">Login</button>
-         </form>
-         </div>
-         </div>
-          </>
+
+        <form onSubmit={handleLogin} className="space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {" "}
+              Email Address{" "}
+            </label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-[#2a9089] focus:border-[#2a9089]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              {" "}
+              Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-[#2a9089] focus:border-[#2a9089]"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-[#2a9089] text-white py-3 rounded-full font-medium hover:bg-[#237a74] transition"
+          >
+            Login{" "}
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-gray-500 mt-6">
+          {" "}
+          Don't have an account?{" "}
+          <a
+            href="/register"
+            className="text-[#2a9089] font-medium hover:underline"
+          >
+            {" "}
+            Register
+          </a>
+        </p>
+      </div>
+    </div>
   );
 }
 
-export default Login
+export default Login;
